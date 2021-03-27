@@ -6,9 +6,9 @@ buildscript {
 }
 
 plugins {
-	id 'org.springframework.boot' version '2.1.18.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.1.18.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 group = 'net.kkuroo'
@@ -16,33 +16,37 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'io.micrometer:micrometer-registry-prometheus:1.1.19'
-	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.1.19'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'junit', module: 'junit'
     }
 
-	testImplementation  "org.junit.jupiter:junit-jupiter-api:${junitJupiterVer}"
-	testImplementation  "org.junit.jupiter:junit-jupiter-params:${junitJupiterVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitJupiterVer}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVer}"
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 bootRun {
-	String activeProfile = System.properties['spring.profiles.active']
-	systemProperty "spring.profiles.active", activeProfile
+    String activeProfile = System.properties['spring.profiles.active']
+    systemProperty "spring.profiles.active", activeProfile
+}
+
+bootJar{
+    archiveName = "${jar.baseName}.${jar.extension}"
 }
